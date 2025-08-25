@@ -15,7 +15,7 @@
 	   $page=$_GET["page"];
 	   if($page==0){
 		   
-		 include("blank_page.php"); 
+		 include("card.php"); 
 		   
 	    }elseif($page==1){
 		   
