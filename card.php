@@ -1,43 +1,48 @@
 <?php
-// config.php include করুন (database connection এর জন্য)
 include("config.php");
 
 // =====================
 // Booking Count Queries
 // =====================
-
-// মোট কতগুলো booking হয়েছে
 $total_booking_q = $conn->query("SELECT COUNT(*) AS total FROM booking");
-$total_booking = $total_booking_q->fetch_assoc()['total'];
-
-// নতুন booking (status = 'new')
-$new_booking_q = $conn->query("SELECT COUNT(*) AS total FROM booking WHERE status='new'");
-$new_booking = $new_booking_q->fetch_assoc()['total'];
-
-// Confirmed booking (status = 'confirmed')
-$confirmed_booking_q = $conn->query("SELECT COUNT(*) AS total FROM booking WHERE status='confirmed'");
-$confirmed_booking = $confirmed_booking_q->fetch_assoc()['total'];
-
-// Cancelled booking (status = 'cancelled')
-$cancelled_booking_q = $conn->query("SELECT COUNT(*) AS total FROM booking WHERE status='cancelled'");
-$cancelled_booking = $cancelled_booking_q->fetch_assoc()['total'];
+$total_booking = 0;
+if($total_booking_q){
+    $total_booking = $total_booking_q->fetch_assoc()['total'];
+}
+$new_booking = $total_booking;  
+$confirmed_booking = 0;
+$cancelled_booking = 0;
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Dashboard</title>
-  <!-- Bootstrap CSS + Font Awesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
-<body>
-<div class="container mt-5">
-  <div class="row">
+<body style="margin:0; padding:0; font-family:Arial, sans-serif;">
 
-    <!-- Card 1: Total Booking -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-warning h-100">
+<!-- Wrapper -->
+<div style="display:flex; min-height:100vh;">
+
+    <!-- Sidebar -->
+    <div style="width:220px; background-color:#343a40; color:white; padding:20px;">
+        <h3 style="margin-bottom:20px;">Dashboard Menu</h3>
+        <ul style="list-style:none; padding-left:0;">
+            <li style="margin-bottom:10px;"><a href="#" style="color:white; text-decoration:none;">Home</a></li>
+            <li style="margin-bottom:10px;"><a href="#" style="color:white; text-decoration:none;">Booking</a></li>
+            <li style="margin-bottom:10px;"><a href="#" style="color:white; text-decoration:none;">Events</a></li>
+            <li style="margin-bottom:10px;"><a href="#" style="color:white; text-decoration:none;">Users</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+  <div class="row justify-content-center">
+
+    <!-- Total Bookings -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px;margin-top:45px;">
+      <div class="card text-white bg-warning h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
           <i class="fas fa-book fa-3x me-3"></i>
           <div>
@@ -48,11 +53,11 @@ $cancelled_booking = $cancelled_booking_q->fetch_assoc()['total'];
       </div>
     </div>
 
-    <!-- Card 2: New Booking -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-primary h-100">
+    <!-- New Booking -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px;margin-top:45px;">
+      <div class="card text-white bg-primary h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
-          <i class="fas fa-book fa-3x me-3"></i>
+          <i class="fas fa-file-alt fa-3x me-3"></i>
           <div>
             <h3 class="mb-0"><?php echo $new_booking; ?></h3>
             <p class="mb-0">New Booking</p>
@@ -61,11 +66,11 @@ $cancelled_booking = $cancelled_booking_q->fetch_assoc()['total'];
       </div>
     </div>
 
-    <!-- Card 3: Confirmed Booking -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-success h-100">
+    <!-- Confirmed Booking -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px; margin-top:45px;">
+      <div class="card text-white bg-success h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
-          <i class="fas fa-book fa-3x me-3"></i>
+          <i class="fas fa-check-circle fa-3x me-3"></i>
           <div>
             <h3 class="mb-0"><?php echo $confirmed_booking; ?></h3>
             <p class="mb-0">Confirmed Booking</p>
@@ -74,41 +79,35 @@ $cancelled_booking = $cancelled_booking_q->fetch_assoc()['total'];
       </div>
     </div>
 
-    <!-- Card 4: Cancelled Booking -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-danger h-100">
+    <!-- Cancelled Booking -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px; margin-top:45px;">
+      <div class="card text-white bg-danger h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
-          <i class="fas fa-book fa-3x me-3"></i>
+          <i class="fas fa-times-circle fa-3x me-3"></i>
           <div>
             <h3 class="mb-0"><?php echo $cancelled_booking; ?></h3>
-            <p class="mb-0">Cancelled Bookings</p>
+            <p class="mb-0">Cancelled Booking</p>
           </div>
         </div>
       </div>
     </div>
 
-
-
- <!-- Card 1 -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-primary h-100">
+    <!-- Listed Categories -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px;">
+      <div class="card text-white bg-primary h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
-          <i class="fas fa-file-alt fa-3x me-3"></i>
+          <i class="fas fa-list fa-3x me-3"></i>
           <div>
             <h3 class="mb-0">7</h3>
             <p class="mb-0">Listed Categories</p>
           </div>
         </div>
-        <div class="card-footer bg-white text-primary d-flex justify-content-between">
-          <a href="#">View Details</a>
-          <i class="fas fa-plus"></i>
-        </div>
       </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-success h-100">
+    <!-- Sponsors -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px;">
+      <div class="card text-white bg-success h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
           <i class="fas fa-server fa-3x me-3"></i>
           <div>
@@ -116,16 +115,12 @@ $cancelled_booking = $cancelled_booking_q->fetch_assoc()['total'];
             <p class="mb-0">Sponsors</p>
           </div>
         </div>
-        <div class="card-footer bg-white text-success d-flex justify-content-between">
-          <a href="#">View Details</a>
-          <i class="fas fa-plus"></i>
-        </div>
       </div>
     </div>
 
-    <!-- Card 3 -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-warning h-100">
+    <!-- Total Events -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px;">
+      <div class="card text-white bg-warning h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
           <i class="fas fa-calendar fa-3x me-3"></i>
           <div>
@@ -133,16 +128,12 @@ $cancelled_booking = $cancelled_booking_q->fetch_assoc()['total'];
             <p class="mb-0">Total Events</p>
           </div>
         </div>
-        <div class="card-footer bg-white text-warning d-flex justify-content-between">
-          <a href="#">View Details</a>
-          <i class="fas fa-plus"></i>
-        </div>
       </div>
     </div>
 
-    <!-- Card 4 -->
-    <div class="col-md-3 mb-4">
-      <div class="card text-white bg-danger h-100">
+    <!-- Total Users -->
+    <div class="col-lg-3 col-md-4 col-sm-6" style="flex:1; min-width:240px; max-width:260px; margin-bottom:15px;">
+      <div class="card text-white bg-danger h-100" style="min-height:100px; border-radius:0.75rem;">
         <div class="card-body d-flex align-items-center">
           <i class="fas fa-users fa-3x me-3"></i>
           <div>
@@ -150,16 +141,16 @@ $cancelled_booking = $cancelled_booking_q->fetch_assoc()['total'];
             <p class="mb-0">Total Reg. Users</p>
           </div>
         </div>
-        <div class="card-footer bg-white text-danger d-flex justify-content-between">
-          <a href="#">View Details</a>
-          <i class="fas fa-plus"></i>
-        </div>
       </div>
     </div>
 
-
   </div>
 </div>
+
+
+        </div> <!-- container -->
+    </div> <!-- main content -->
+
+</div> <!-- wrapper -->
 </body>
 </html>
-
