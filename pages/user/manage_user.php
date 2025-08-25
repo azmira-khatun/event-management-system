@@ -44,7 +44,7 @@ if (isset($_POST["btnDelete"])) {
                     </thead>
                     <tbody>
                         <?php
-                        $users = $conn->query("SELECT id, firstname, lastname, email password FROM users");
+                        $users = $conn->query("SELECT id, firstname, lastname, email,password FROM users");
                         if ($users) {
                             while (list($id, $fname, $lname, $email) = $users->fetch_row()) {
                                 echo "<tr>
