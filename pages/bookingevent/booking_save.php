@@ -3,13 +3,13 @@ include("config.php");
 
 $msg = "";
 
-// যদি delete parameter আসে তাহলে ডিলিট হবে
-if (isset($_GET['delete'])) {
-    $id = intval($_GET['delete']);
+// যদি delete form থেকে আসে তাহলে ডিলিট হবে
+if (isset($_POST['btnDelete'])) {
+    $id = intval($_POST['txtId']);
     if ($conn->query("DELETE FROM booking WHERE id=$id")) {
-        $msg = "<div style='color:green; padding:5px;'>Booking deleted successfully!</div>";
+        $msg = "<div class='alert alert-success'>Booking deleted successfully!</div>";
     } else {
-        $msg = "<div style='color:red; padding:5px;'>Error deleting booking: " . $conn->error . "</div>";
+        $msg = "<div class='alert alert-danger'>Error deleting booking: " . $conn->error . "</div>";
     }
 }
 
@@ -58,11 +58,22 @@ $bookings = $conn->query($sql);
                   <td><?php echo htmlspecialchars($row['contact_number']); ?></td>
                   <td><?php echo htmlspecialchars($row['address']); ?></td>
                   <td>
-                    <a href="?delete=<?php echo $row['id']; ?>" 
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('Are you sure you want to delete this booking?');">
-                       Delete
-                    </a>
+                    <div class="d-flex">
+                      <!-- Delete Form -->
+                      <form action="" method="post" 
+                            onsubmit="return confirm('Are you sure you want to delete this booking?');"
+                            class="mr-1">
+                        <input type="hidden" name="txtId" value="<?php echo $row['id']; ?>" />
+                        <button type="submit" name="btnDelete" class="btn btn-danger btn-sm">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </form>
+                      <!-- Edit Button -->
+                      <a href="home.php?page=edit_booking&id=<?php echo $row['id']; ?>" 
+                         class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                    </div>
                   </td>
                 </tr>
               <?php endwhile; ?>
