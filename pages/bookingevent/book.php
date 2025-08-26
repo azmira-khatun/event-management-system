@@ -10,8 +10,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['customer_name'])) {
     $gmail          = $conn->real_escape_string($_POST['gmail']);
     $contact_number = $conn->real_escape_string($_POST['contact_number']);
     $address        = $conn->real_escape_string($_POST['address']);
+    $discountRent = isset($_POST['discount_rent']) && is_numeric($_POST['discount_rent'])
+    ? (float)$_POST['discount_rent']
+    : 0.00;
+   
+    // Handle image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    $uploadDir = 'uploads/';
+    $imageName = basename($_FILES['image']['name']);
+    $imageTmp  = $_FILES['image']['tmp_name'];
+    $imageSize = $_FILES['image']['size'];
+    $imageExt  = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
+    $allowedExt = ['jpg', 'jpeg', 'png', 'gif'];
 
-    // Event এর ইনফো আনা
+    if (in_array($imageExt, $allowedExt) && $imageSize <= 2 * 1024 * 1024) {
+        $newImageName = uniqid("img_", true) . '.' . $imageExt;
+        $imagePath = $uploadDir . $newImageName;
+
+        if (move_uploaded_file($imageTmp, $imagePath)) {
+            // Image uploaded successfully
+        } else {
+            $msg = "<div class='alert alert-danger'>Failed to upload image.</div>";
+        }
+    } else {
+        $msg = "<div class='alert alert-danger'>Invalid image file. Only JPG, PNG, GIF under 2MB are allowed.</div>";
+    }
+}
+
+
+
+   
+   
+   // Event এর ইনফো আনা
     $event_q = $conn->query("
         SELECT e.date, v.id AS venue_id
         FROM event e
@@ -41,6 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['customer_name'])) {
     }
 }
 
+
+
+
+
 // Dropdown এর জন্য event লিস্ট
 $events = $conn->query("
     SELECT e.id, e.event_name, e.date, v.name AS venue_name, v.capacity, v.rent
@@ -48,6 +82,10 @@ $events = $conn->query("
     JOIN venue v ON e.venue_id = v.id
     WHERE e.date > NOW()
 ");
+
+
+
+
 ?>
 
 <div class="content-wrapper">
@@ -74,6 +112,11 @@ $events = $conn->query("
             <?php endwhile; ?>
           </select>
         </div>
+        <!-- Image Upload Field -->
+    <div class="form-group">
+    <label>Image</label>
+    <input type="file" name="image" class="form-control" accept="image/*">
+  </div>
 
         <div class="form-group">
           <label>Venue</label>
@@ -89,6 +132,11 @@ $events = $conn->query("
           <label>Rent</label>
           <input type="text" id="field_rent" class="form-control" readonly>
         </div>
+        <!-- Discount Rent Field -->
+  <div class="form-group">
+    <label>Discount Rent</label>
+    <input type="number" name="discount_rent" step="0.01" class="form-control">
+  </div>
 
         <div class="form-group">
           <label>Date</label>
