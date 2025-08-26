@@ -108,37 +108,49 @@
     </section>
 
     <!-- Upcoming Events Section -->
-    <section id="events" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Upcoming Events</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Event Card 1 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Tech Conference 2025</h3>
-                        <p class="text-gray-500 text-sm mb-4"><i class="fas fa-calendar-alt mr-2 text-indigo-600"></i>Oct 5, 2025 | <i class="fas fa-map-marker-alt mr-2 text-indigo-600"></i>New York City</p>
-                        <a href="#" class="inline-block px-4 py-2 text-sm text-indigo-600 font-medium rounded-full border border-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors duration-300">Learn More</a>
-                    </div>
-                </div>
-                <!-- Event Card 2 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Marketing Summit</h3>
-                        <p class="text-gray-500 text-sm mb-4"><i class="fas fa-calendar-alt mr-2 text-indigo-600"></i>Nov 15, 2025 | <i class="fas fa-map-marker-alt mr-2 text-indigo-600"></i>San Francisco</p>
-                        <a href="#" class="inline-block px-4 py-2 text-sm text-indigo-600 font-medium rounded-full border border-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors duration-300">Learn More</a>
-                    </div>
-                </div>
-                <!-- Event Card 3 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Startup Expo</h3>
-                        <p class="text-gray-500 text-sm mb-4"><i class="fas fa-calendar-alt mr-2 text-indigo-600"></i>Dec 1, 2025 | <i class="fas fa-map-marker-alt mr-2 text-indigo-600"></i>Chicago</p>
-                        <a href="#" class="inline-block px-4 py-2 text-sm text-indigo-600 font-medium rounded-full border border-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors duration-300">Learn More</a>
-                    </div>
+<!-- Upcoming Events Section -->
+<section id="events" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Upcoming Events</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Event Card 1 -->
+            <div class="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-cover bg-center" 
+                 style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80');">
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+                <div class="relative p-6 text-white">
+                    <h3 class="text-xl font-semibold mb-2">Tech Conference 2025</h3>
+                    <p class="text-sm mb-4"><i class="fas fa-calendar-alt mr-2"></i>Oct 5, 2025 | <i class="fas fa-map-marker-alt mr-2"></i>New York City</p>
+                    <a href="#" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Learn More</a>
                 </div>
             </div>
+
+            <!-- Event Card 2 -->
+            <div class="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-cover bg-center" 
+                 style="background-image: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80');">
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+                <div class="relative p-6 text-white">
+                    <h3 class="text-xl font-semibold mb-2">Startup Meetup 2025</h3>
+                    <p class="text-sm mb-4"><i class="fas fa-calendar-alt mr-2"></i>Nov 12, 2025 | <i class="fas fa-map-marker-alt mr-2"></i>San Francisco</p>
+                    <a href="#" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-cover bg-center" 
+     style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80');">
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    <div class="relative p-6 text-white">
+        <h3 class="text-xl font-semibold mb-2">Design Workshop 2025</h3>
+        <p class="text-sm mb-4"><i class="fas fa-calendar-alt mr-2"></i>Dec 3, 2025 | <i class="fas fa-map-marker-alt mr-2"></i>Los Angeles</p>
+        <a href="#" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Learn More</a>
+    </div>
+</div>
+
+
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Pricing Section (NEW) -->
     <section id="pricing" class="py-16 bg-gray-50">
