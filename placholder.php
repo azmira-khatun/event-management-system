@@ -59,7 +59,7 @@
 		    include("pages/bookingevent/booking_save.php");
 		}else if($page==12){
 		   
-		    include("pages/bookingevent/edit.php");
+		    include("pages/bookingevent/edit_booking.php");
 		  
    }else{
 	   

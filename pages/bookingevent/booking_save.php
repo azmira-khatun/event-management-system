@@ -69,8 +69,9 @@ $bookings = $conn->query($sql);
                         </button>
                       </form>
                       <!-- Edit Button -->
-                      <a href="home.php?page=edit_booking&id=<?php echo $row['id']; ?>" 
-                         class="btn btn-primary btn-sm">
+                    <!-- <a href='home.php?page=3&id=$id' class='btn btn-primary btn-sm'> -->
+                          <a href="home.php?page=12&id=<?php echo $row['id']; ?>"
+                            class="btn btn-primary btn-sm">
                         <i class="fas fa-edit"></i>
                       </a>
                     </div>
