@@ -42,9 +42,7 @@ $bookings = $conn->query($sql);
                             <th>Email</th>
                             <th>Contact</th>
                             <th>Address</th>
-                            <th>Image</th>
-                            <th>Discount Rent</th>
-                            <th>Actions</th>
+                           <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,14 +57,6 @@ $bookings = $conn->query($sql);
                                     <td><?= htmlspecialchars($row['gmail']); ?></td>
                                     <td><?= htmlspecialchars($row['contact_number']); ?></td>
                                     <td><?= htmlspecialchars($row['address']); ?></td>
-                                    <td>
-                                        <?php if ($row['image']): ?>
-                                            <img src="<?= htmlspecialchars($row['image']); ?>" alt="image" width="50">
-                                        <?php else: ?>
-                                            N/A
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?= htmlspecialchars($row['discount_rent']); ?></td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="edit_booking.php?id=<?= $row['id']; ?>"

@@ -41,12 +41,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['customer_name'])) {
     }
 }
 
+if (isset($_GET['id']) && ctype_digit($_GET['id'])) {
+    $event_id = (int) $_GET['id'];  // Safely convert to integer
+} else {
+    die("Invalid event ID.");  // Handle the error as needed
+}
+
 // Dropdown এর জন্য event লিস্ট
 $events = $conn->query("
     SELECT e.id, e.event_name, e.date, v.name AS venue_name, v.capacity, v.rent
     FROM event e
     JOIN venue v ON e.venue_id = v.id
-    WHERE e.date > NOW()
+    WHERE e.date > NOW() and e.id= $event_id;
 ");
 ?>
 

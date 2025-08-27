@@ -1,3 +1,12 @@
+<?php
+include("config.php");
+
+// Redirect if not connected/session
+if (!isset($conn)) {
+    header("location:login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,47 +122,42 @@
     <!-- Upcoming Events Section -->
 <!-- Upcoming Events Section -->
 <section id="events" class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Upcoming Events</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Upcoming Events</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <?php
+      $events = $conn->query("
+          SELECT e.id, e.event_name, e.type, e.date, v.name AS venue_name,e.image
+          FROM event e
+          JOIN venue v ON e.venue_id = v.id
+          ORDER BY e.id DESC
+      ");
+      while ($row = $events->fetch_assoc()):
+        // Assign variables
+        $ename = htmlspecialchars($row['event_name']);
+        $edate = htmlspecialchars($row['date']);
+        $venue = htmlspecialchars($row['venue_name']);
+        $image = htmlspecialchars($row['image']);
 
-            <!-- Event Card 1 -->
-            <div class="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-cover bg-center" 
-                 style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80');">
-                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-                <div class="relative p-6 text-white">
-                    <h3 class="text-xl font-semibold mb-2">Tech Conference 2025</h3>
-                    <p class="text-sm mb-4"><i class="fas fa-calendar-alt mr-2"></i>Oct 5, 2025 | <i class="fas fa-map-marker-alt mr-2"></i>New York City</p>
-                    <a href="#" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Learn More</a>
-                </div>
-            </div>
+      ?>
+      <!-- Tailwind Card Component -->
+      <div class="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-cover bg-center" style="background-image: url('<?php echo $image; ?>');">
 
-            <!-- Event Card 2 -->
-            <div class="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-cover bg-center" 
-                 style="background-image: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80');">
-                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-                <div class="relative p-6 text-white">
-                    <h3 class="text-xl font-semibold mb-2">Startup Meetup 2025</h3>
-                    <p class="text-sm mb-4"><i class="fas fa-calendar-alt mr-2"></i>Nov 12, 2025 | <i class="fas fa-map-marker-alt mr-2"></i>San Francisco</p>
-                    <a href="#" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Learn More</a>
-                </div>
-            </div>
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
 
-            <!-- Event Card 3 -->
-            <div class="relative rounded-2xl overflow-hidden shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 bg-cover bg-center" 
-     style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80');">
-    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-    <div class="relative p-6 text-white">
-        <h3 class="text-xl font-semibold mb-2">Design Workshop 2025</h3>
-        <p class="text-sm mb-4"><i class="fas fa-calendar-alt mr-2"></i>Dec 3, 2025 | <i class="fas fa-map-marker-alt mr-2"></i>Los Angeles</p>
-        <a href="#" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Learn More</a>
-    </div>
-</div>
-
+        <div class="relative p-6 text-white">
+          <h3 class="text-xl font-semibold mb-2"><?= $ename ?></h3>
+          <p class="text-sm mb-4"><i class="fas fa-calendar-alt mr-2"></i><?= $edate ?> | <i class="fas fa-map-marker-alt mr-2"></i><?= $venue ?></p>
+          <!-- <a href="customer_book.php?id=<?= $row['id'] ?>" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Learn More</a> -->
+        <a href="customer_book.php" class="inline-block px-4 py-2 text-sm font-medium rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-300">Book Now</a>
 
         </div>
+      </div>
+      <?php endwhile; ?>
     </div>
+  </div>
 </section>
+
 
     <!-- Pricing Section (NEW) -->
     <section id="pricing" class="py-16 bg-gray-50">
