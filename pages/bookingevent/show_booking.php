@@ -5,12 +5,12 @@ $msg = "";
 
 // যদি delete form থেকে আসে তাহলে ডিলিট হবে
 if (isset($_POST['btnDelete'])) {
-    $id = intval($_POST['txtId']);
-    if ($conn->query("DELETE FROM booking WHERE id=$id")) {
-        $msg = "<div class='alert alert-success'>Booking deleted successfully!</div>";
-    } else {
-        $msg = "<div class='alert alert-danger'>Error deleting booking: " . $conn->error . "</div>";
-    }
+  $id = intval($_POST['txtId']);
+  if ($conn->query("DELETE FROM booking WHERE id=$id")) {
+    $msg = "<div class='alert alert-success'>Booking deleted successfully!</div>";
+  } else {
+    $msg = "<div class='alert alert-danger'>Error deleting booking: " . $conn->error . "</div>";
+  }
 }
 
 // সব বুকিং আনা (delete হোক বা না হোক সবসময় নতুন query চলবে)
@@ -24,7 +24,9 @@ $bookings = $conn->query($sql);
 ?>
 
 <div class="content-wrapper">
-  <section class="content-header"><h1>All Bookings</h1></section>
+  <section class="content-header">
+    <h1>All Bookings</h1>
+  </section>
   <section class="content">
     <div class="card">
       <div class="card-body">
@@ -47,7 +49,7 @@ $bookings = $conn->query($sql);
           </thead>
           <tbody>
             <?php if ($bookings && $bookings->num_rows > 0): ?>
-              <?php while($row = $bookings->fetch_assoc()): ?>
+              <?php while ($row = $bookings->fetch_assoc()): ?>
                 <tr>
                   <td><?php echo $row['id']; ?></td>
                   <td><?php echo htmlspecialchars($row['event_name']); ?></td>
@@ -60,18 +62,16 @@ $bookings = $conn->query($sql);
                   <td>
                     <div class="d-flex">
                       <!-- Delete Form -->
-                      <form action="" method="post" 
-                            onsubmit="return confirm('Are you sure you want to delete this booking?');"
-                            class="mr-1">
+                      <form action="" method="post"
+                        onsubmit="return confirm('Are you sure you want to delete this booking?');" class="mr-1">
                         <input type="hidden" name="txtId" value="<?php echo $row['id']; ?>" />
                         <button type="submit" name="btnDelete" class="btn btn-danger btn-sm">
                           <i class="fas fa-trash"></i>
                         </button>
                       </form>
                       <!-- Edit Button -->
-                    <!-- <a href='home.php?page=3&id=$id' class='btn btn-primary btn-sm'> -->
-                          <a href="home.php?page=12&id=<?php echo $row['id']; ?>"
-                            class="btn btn-primary btn-sm">
+                      <!-- <a href='home.php?page=3&id=$id' class='btn btn-primary btn-sm'> -->
+                      <a href="home.php?page=12&id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">
                         <i class="fas fa-edit"></i>
                       </a>
                     </div>
@@ -79,7 +79,9 @@ $bookings = $conn->query($sql);
                 </tr>
               <?php endwhile; ?>
             <?php else: ?>
-              <tr><td colspan="9" class="text-center">No bookings found</td></tr>
+              <tr>
+                <td colspan="9" class="text-center">No bookings found</td>
+              </tr>
             <?php endif; ?>
           </tbody>
         </table>
