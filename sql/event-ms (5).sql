@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2025 at 02:38 AM
+-- Generation Time: Aug 27, 2025 at 08:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -56,7 +56,10 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`id`, `event_id`, `venue_id`, `date`, `customer_name`, `gmail`, `contact_number`, `address`) VALUES
-(1, 1, 2, '2025-08-30', 'Azmira', 'azmira@gmail.com', '019890998', 'Uttara Dhaka');
+(1, 1, 2, '2025-08-30', 'Azmira', 'azmira@gmail.com', '019890998', 'Uttara Dhaka'),
+(2, 1, 2, '2025-08-30', 'Azmira', 'azmira@gmail.com', '019890998', 'Uttara Dhaka'),
+(3, 5, 2, '2025-08-29', 'Azmira', 'azmira@gmail.com', '019890998', 'Uttara Dhaka'),
+(4, 5, 2, '2025-08-29', 'Test', 'test@gmail.com', '907556', 'uttara');
 
 -- --------------------------------------------------------
 
@@ -82,17 +85,21 @@ CREATE TABLE `event` (
   `description` varchar(1000) NOT NULL,
   `type` varchar(100) NOT NULL,
   `date` date NOT NULL,
-  `venue_id` int(11) NOT NULL
+  `venue_id` int(11) NOT NULL,
+  `image` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `event_name`, `description`, `type`, `date`, `venue_id`) VALUES
-(1, 'wedding', 'good', 'Wedding', '2025-08-30', 2),
-(3, 'Birthday party', 'good', 'Birthday', '2025-08-23', 2),
-(4, 'marriagev ceremony', 'good', 'Wedding', '2025-08-25', 2);
+INSERT INTO `event` (`id`, `event_name`, `description`, `type`, `date`, `venue_id`, `image`) VALUES
+(1, 'wedding', 'good', 'Wedding', '2025-08-30', 2, './pages/bookingevent/uploads/pest_img.jpg'),
+(3, 'Birthday party', 'good', 'Birthday', '2025-08-23', 2, NULL),
+(4, 'marriagev ceremony', 'good', 'Wedding', '2025-08-25', 2, NULL),
+(5, 'BSC workshop', 'good', 'Seminar', '2025-08-29', 2, NULL),
+(6, 'MBBS workshop', 'Very short', 'Conference', '2025-08-31', 4, 'uploads/evt_68af3204983d29.48553702.jpg'),
+(7, 'Mahendi', 'goog', 'Wedding', '2025-08-29', 2, 'uploads/evt_68af343f99fa54.89201712.jpg');
 
 -- --------------------------------------------------------
 
@@ -227,7 +234,7 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -239,7 +246,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `table_rolemaping`
